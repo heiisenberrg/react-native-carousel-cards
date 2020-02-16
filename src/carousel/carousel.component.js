@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, ScrollView, Image, Dimensions, TouchableOpacity } from 'react-native';
-import styles from './carousel.style';
 import PropTypes from 'prop-types';
 const { width } = Dimensions.get('window');
 
@@ -52,18 +51,20 @@ class RNCarousel extends React.PureComponent {
   render() {
     const {
       data,
-      showArrows,
-      arrowSize,
-      height,
-      contentContainerStyle,
-      showsHorizontalScrollIndicator,
+      imageResizeMode,
       indicatorBorderColor,
       indicatorActiveBackgroundColor,
+      height,
+      arrowSize,
+      showArrows,
+      showIndicator,
+      showsHorizontalScrollIndicator,
+      contentContainerStyle,
       indicatorContainerStyle,
       indicatorStyle,
       isCustomCarouselContent,
       carouselContent,
-      imageResizeMode } = this.props;
+    } = this.props;
     const { interval } = this.state;
     return (
       <View style={{ ...styles.container, height }}>
@@ -93,9 +94,9 @@ class RNCarousel extends React.PureComponent {
         {showArrows && <TouchableOpacity style={styles.rightArrow} onPress={() => this.scrollTo('right')}>
           <Image style={{ width: arrowSize, height: arrowSize }} source={require('../assets/right.png')} />
         </TouchableOpacity>}
-        <View style={{ ...styles.indicatorContainer, ...indicatorContainerStyle }}>
-          {items &&
-            items.map((item, index) => {
+        {showIndicator && <View style={{ ...styles.indicatorContainer, ...indicatorContainerStyle }}>
+          {data &&
+            data.map((item, index) => {
               return (
                 <View
                   key={`index-bullets-${index}`}
@@ -107,7 +108,7 @@ class RNCarousel extends React.PureComponent {
                   }}></View>
               );
             })}
-        </View>
+        </View>}
       </View>
     );
   }
@@ -149,3 +150,69 @@ RNCarousel.defaultProps = {
 };
 
 export default RNCarousel;
+
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    height: 600,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  scrollView: {
+    display: 'flex',
+    flexDirection: 'row',
+    overflow: 'hidden',
+  },
+  carouselContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  carouselContent: {
+    flexBasis: '100%',
+    flex: 1,
+    maxWidth: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
+  leftArrow: {
+    position: 'absolute',
+    left: 10,
+    top: '50%',
+    bottom: 0,
+    zIndex: 10
+  },
+  rightArrow: {
+    position: 'absolute',
+    right: 10,
+    top: '50%',
+    bottom: 0,
+    zIndex: 10
+  },
+  indicatorContainer: {
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: 0,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    paddingHorizontal: 5,
+    paddingTop: 5,
+    paddingBottom: 10,
+  },
+  indicatorContent: {
+    paddingHorizontal: 4,
+    paddingVertical: 4,
+    marginVertical: 8,
+    marginHorizontal: 5,
+    borderWidth: 1,
+    borderRadius: 4,
+  },
+});
