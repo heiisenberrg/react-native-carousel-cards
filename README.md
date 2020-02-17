@@ -1,5 +1,9 @@
 # react-native-carousel-cards
 
+A simple and fully customizable React Native carousel card component.
+
+![](demo/demo.gif)
+
 ## Getting started
 
 `npm i react-native-carousel-cards`
@@ -39,7 +43,7 @@ export default class App extends React.Component {
 ## Props
 
 |Prop|Type|Description|
-|-|:-----:|:---:|
+|-|:----------:|:-----:|:----------:|
 |`data`|Array|Images data
 |`imageResizeMode`|String| Image resize mode, similar to resize mode in Images in react native.default: `cover`
 |`indicatorBorderColor`|String| Bullets border color.default: `white`
