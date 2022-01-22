@@ -58,4 +58,5 @@ export default class App extends React.Component {
 |`indicatorStyle`|Object| To change indicator style.
 |`contentContainerStyle`|Object| To change scroll view container style.
 |`indicatorContainerStyle`|Object| To change indicator container style.
-|`carouselContent`|React component| Custom carousel content component
+|`carouselContent`|React component| Custom carousel content component.
+|`onImagePressCb`|Function| Callback function called when the image item is pressed.

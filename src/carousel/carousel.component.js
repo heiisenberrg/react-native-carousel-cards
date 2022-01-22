@@ -64,6 +64,7 @@ class RNCarousel extends React.PureComponent {
       indicatorStyle,
       isCustomCarouselContent,
       carouselContent,
+      onImagePressCb
     } = this.props;
     const { interval } = this.state;
     return (
@@ -83,7 +84,14 @@ class RNCarousel extends React.PureComponent {
           <View style={styles.carouselContainer}>
             <View style={styles.carouselContent}>
               {!isCustomCarouselContent && data && data.length > 0 && data.map((item, index) => {
-                return <Image key={`index-images-${index}`} style={{ resizeMode: imageResizeMode, height: height, width: width }} source={{ uri: item.url }} />;
+                if (!item?.url) {
+                  return null;
+                }
+                return (
+                  <TouchableOpacity activeOpacity={0.7} onPress={() => onImagePressCb(item, index)}>
+                    <Image key={`index-images-${index}`} style={{ resizeMode: imageResizeMode, height: height, width: width }} source={item?.url.match(/http|https/g) ? { uri: item.url } : require(item.url)} />;
+                  </TouchableOpacity>
+                )
               })}
               {
                 isCustomCarouselContent && <>{carouselContent}</>
@@ -130,6 +138,7 @@ RNCarousel.propTypes = {
   contentContainerStyle: PropTypes.object,
   indicatorContainerStyle: PropTypes.object,
   carouselContent: PropTypes.componentOrElement,
+  onImagePressCb: PropTypes.func
 };
 
 RNCarousel.defaultProps = {
@@ -147,6 +156,7 @@ RNCarousel.defaultProps = {
   indicatorStyle: {},
   contentContainerStyle: {},
   indicatorContainerStyle: {},
+  onImagePressCb: () => { }
 };
 
 export default RNCarousel;
