@@ -1,6 +1,6 @@
 {
   "name": "react-native-carousel-cards",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Carousel images in react native (suports both Android and iOS)",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "author": "Ajaykkumar Rajendran",
   "license": "MIT",
   "devDependencies": {
-    "metro-react-native-babel-preset": "^0.66.2"
+    "metro-react-native-babel-preset": "^0.70.2"
   },
   "dependencies": {
     "prop-types": "^15.8.1"
